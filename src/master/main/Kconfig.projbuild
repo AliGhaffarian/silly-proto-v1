@@ -1,0 +1,5 @@
+menu "master configs"
+    config SLAVES_NUM
+        int "Number of slaves"
+        default 1
+endmenu

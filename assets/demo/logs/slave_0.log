@@ -1,0 +1,2065 @@
+Adding "qemu"'s dependency "all" to list of commands with default set of options.
+Executing action: all (aliases: build)
+Running ninja in directory /home/work/Downloads/ext/06_single_master_multi_slaves/slave/build
+Executing "ninja all"...
+[1/5] cd /home/work/Downloads/ext/06_single_master_multi_slaves/slave/build && /home/work/.espressif/tools/python/v6.0.2/venv/bin/python /opt/espressif/v6.0.2/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/work/Downloads/ext/06_single_master_multi_slaves/slave/build/partition_table/partition-table.bin /home/work/Downloads/ext/06_single_master_multi_slaves/slave/build/slave.bin
+slave.bin binary size 0x3aa60 bytes. Smallest app partition is 0x100000 bytes. 0xc55a0 bytes (77%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] cd /home/work/Downloads/ext/06_single_master_multi_slaves/slave/build/bootloader && /home/work/.espressif/tools/python/v6.0.2/venv/bin/python /opt/espressif/v6.0.2/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/work/Downloads/ext/06_single_master_multi_slaves/slave/build/bootloader/bootloader.bin
+Bootloader binary size 0x6f40 bytes. 0xc0 bytes (1%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Generating NVS partition image for nvs from ../silly_params.csv
+
+Creating NVS binary with version: V2 - Multipage Blob Support Enabled
+
+Created NVS binary: ===> /home/work/Downloads/ext/06_single_master_multi_slaves/slave/build/nvs.bin
+[5/5] Completed 'bootloader'
+esptool --chip=esp32 merge-bin --output=/home/work/Downloads/ext/06_single_master_multi_slaves/slave/build/qemu_flash.bin --pad-to-size=2MB --flash-mode dio --flash-freq 40m --flash-size 2MB 0x1000 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x9000 nvs.bin 0x10000 slave.bin
+esptool v5.3.1
+SHA digest in image updated.
+Wrote 0x200000 bytes to file '/home/work/Downloads/ext/06_single_master_multi_slaves/slave/build/qemu_flash.bin', ready to flash to offset 0x0.
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0040,len:6316
+ho 0 tail 12 room 4
+load:0x40078000,len:17428
+load:0x40080400,len:4640
+entry 0x400807e0
+I (684) boot: ESP-IDF v6.0.2 2nd stage bootloader
+I (685) boot: compile time Jul 25 2026 16:39:18
+I (685) boot: Multicore bootloader
+I (727) boot: chip revision: v3.0
+I (729) boot.esp32: SPI Speed      : 40MHz
+I (729) boot.esp32: SPI Mode       : DIO
+I (729) boot.esp32: SPI Flash Size : 2MB
+I (735) boot: Enabling RNG early entropy source...
+I (744) boot: Partition Table:
+I (744) boot: ## Label            Usage          Type ST Offset   Length
+I (744) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (745) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (745) boot:  2 factory          factory app      00 00 00010000 00100000
+I (748) boot: End of partition table
+I (792) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0e5c8h ( 58824) map
+I (819) esp_image: segment 1: paddr=0001e5f0 vaddr=3ffb0000 size=01a28h (  6696) load
+I (836) esp_image: segment 2: paddr=00020020 vaddr=400d0020 size=1ce6ch (118380) map
+I (878) esp_image: segment 3: paddr=0003ce94 vaddr=3ffb1a28 size=00c5ch (  3164) load
+I (898) esp_image: segment 4: paddr=0003daf8 vaddr=40080000 size=0cf0ch ( 53004) load
+I (922) esp_image: segment 5: paddr=0004aa0c vaddr=50000000 size=00028h (    40) load
+I (988) boot: Loaded app from partition at offset 0x10000
+I (988) boot: Disabling RNG early entropy source...
+I (1006) cpu_start: Multicore app
+I (1705) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (1708) cpu_start: Pro cpu start user code
+I (1708) cpu_start: cpu freq: 160000000 Hz
+I (1708) app_init: Application information:
+I (1709) app_init: Project name:     slave
+I (1709) app_init: App version:      1
+I (1709) app_init: Compile time:     Jul 25 2026 16:39:14
+I (1709) app_init: ELF file SHA256:  83eef8e47...
+I (1709) app_init: ESP-IDF:          v6.0.2
+I (1709) efuse_init: Min chip rev:     v0.0
+I (1710) efuse_init: Max chip rev:     v3.99 
+I (1710) efuse_init: Chip rev:         v3.0
+I (1711) heap_init: Initializing. RAM available for dynamic allocation:
+I (1711) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
+I (1712) heap_init: At 3FFB3068 len 0002CF98 (179 KiB): DRAM
+I (1712) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (1712) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (1712) heap_init: At 4008CF0C len 000130F4 (76 KiB): IRAM
+I (1758) spi_flash: detected chip: winbond
+I (1763) spi_flash: flash io: dio
+I (1778) main_task: Started on CPU0
+I (1778) main_task: Calling app_main()
+I (2298) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x0
+}
+I (2308) silly_proto: trying to recv a packet
+I (2308) silly_proto: skipping until magic
+I (4038) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 1
+  silly_checksum_t header_checksum = 8901
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t pkt_id = 1
+  silly_slave_id_t dst_slave_id = 2
+  char[] data = *0x3ffb703b
+}
+I (4038) silly_proto: successfully read the header
+I (4038) silly_proto: packet has no data, recv done
+I (4038) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x0
+}
+I (4038) silly_proto: trying to recv a packet
+I (4038) silly_proto: skipping until magic
+I (9338) slave: timed out
+I (9338) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x0
+}
+I (9338) silly_proto: trying to recv a packet
+I (9338) silly_proto: skipping until magic
+I (10638) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 4
+  silly_checksum_t header_checksum = 8903
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 2
+  char[] data = *0x3ffb703b
+}
+I (10638) silly_proto: successfully read the header
+I (10638) silly_proto: packet has no data, recv done
+I (10638) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x0
+}
+I (10638) silly_proto: trying to recv a packet
+I (10638) silly_proto: skipping until magic
+I (10638) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 1
+  silly_checksum_t header_checksum = 8900
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t pkt_id = 1
+  silly_slave_id_t dst_slave_id = 1
+  char[] data = *0x3ffb703b
+}
+I (10648) silly_proto: successfully read the header
+I (10648) silly_proto: packet has no data, recv done
+I (10648) silly_proto: got an edge pkt_id
+I (10648) slave: token received
+I (10648) slave: sending ack
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 9
+  silly_checksum_t header_checksum = 8907
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (10648) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (10648) silly_proto: trying to recv a packet
+I (10648) silly_proto: skipping until magic
+I (15948) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 10079
+  silly_checksum_t data_checksum = 1156
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 1
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7073
+}
+I (15948) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 1
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb705c
+}
+I (15948) silly_proto: trying to recv a packet
+I (15948) silly_proto: skipping until magic
+I (15998) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8922
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (15998) silly_proto: successfully read the header
+I (15998) silly_proto: packet has no data, recv done
+I (15998) slave: got packet from master
+I (15998) silly_proto: got an old pkt_id
+I (15998) slave: got an edge pkt_id ack
+I (15998) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 10060
+  silly_checksum_t data_checksum = 1136
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 2
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7097
+}
+I (15998) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 2
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 1
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7080
+}
+I (15998) silly_proto: trying to recv a packet
+I (15998) silly_proto: skipping until magic
+I (16098) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8923
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 2
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16098) silly_proto: successfully read the header
+I (16098) silly_proto: packet has no data, recv done
+I (16098) slave: got packet from master
+I (16098) silly_proto: got an old pkt_id
+I (16098) slave: got an edge pkt_id ack
+I (16098) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 10087
+  silly_checksum_t data_checksum = 1162
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 3
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (16098) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 3
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 2
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (16098) silly_proto: trying to recv a packet
+I (16098) silly_proto: skipping until magic
+I (16198) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8924
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 3
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16198) silly_proto: successfully read the header
+I (16198) silly_proto: packet has no data, recv done
+I (16198) slave: got packet from master
+I (16198) silly_proto: got an old pkt_id
+I (16198) slave: got an edge pkt_id ack
+I (16208) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9812
+  silly_checksum_t data_checksum = 886
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 4
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb707b
+}
+I (16208) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 4
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 3
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (16208) silly_proto: trying to recv a packet
+I (16208) silly_proto: skipping until magic
+I (16298) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8925
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 4
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16298) silly_proto: successfully read the header
+I (16298) silly_proto: packet has no data, recv done
+I (16298) slave: got packet from master
+I (16298) silly_proto: got an old pkt_id
+I (16298) slave: got an edge pkt_id ack
+I (16298) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9739
+  silly_checksum_t data_checksum = 812
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 5
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (16298) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 5
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 4
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (16298) silly_proto: trying to recv a packet
+I (16308) silly_proto: skipping until magic
+I (16398) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8926
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 5
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16398) silly_proto: successfully read the header
+I (16398) silly_proto: packet has no data, recv done
+I (16398) slave: got packet from master
+I (16398) silly_proto: got an old pkt_id
+I (16398) slave: got an edge pkt_id ack
+I (16398) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 10070
+  silly_checksum_t data_checksum = 1142
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 6
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb707b
+}
+I (16398) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 6
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 5
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (16398) silly_proto: trying to recv a packet
+I (16398) silly_proto: skipping until magic
+I (16498) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8927
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 6
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16498) silly_proto: successfully read the header
+I (16498) silly_proto: packet has no data, recv done
+I (16498) slave: got packet from master
+I (16498) silly_proto: got an old pkt_id
+I (16498) slave: got an edge pkt_id ack
+I (16498) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 10014
+  silly_checksum_t data_checksum = 1085
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 7
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (16498) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 7
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 6
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (16498) silly_proto: trying to recv a packet
+I (16498) silly_proto: skipping until magic
+I (16598) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8928
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 7
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16598) silly_proto: successfully read the header
+I (16598) silly_proto: packet has no data, recv done
+I (16598) slave: got packet from master
+I (16598) silly_proto: got an old pkt_id
+I (16598) slave: got an edge pkt_id ack
+I (16598) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9933
+  silly_checksum_t data_checksum = 1003
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 8
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb707b
+}
+I (16598) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 8
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 7
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (16598) silly_proto: trying to recv a packet
+I (16608) silly_proto: skipping until magic
+I (16698) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8929
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 8
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16698) silly_proto: successfully read the header
+I (16698) silly_proto: packet has no data, recv done
+I (16708) slave: got packet from master
+I (16708) silly_proto: got an old pkt_id
+I (16708) slave: got an edge pkt_id ack
+I (16708) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 10073
+  silly_checksum_t data_checksum = 1142
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 9
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (16708) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 9
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 8
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (16708) silly_proto: trying to recv a packet
+I (16708) silly_proto: skipping until magic
+I (16798) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8930
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 9
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16798) silly_proto: successfully read the header
+I (16798) silly_proto: packet has no data, recv done
+I (16798) slave: got packet from master
+I (16798) silly_proto: got an old pkt_id
+I (16798) slave: got an edge pkt_id ack
+I (16798) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9892
+  silly_checksum_t data_checksum = 960
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 10
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb707b
+}
+I (16798) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 10
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 9
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (16798) silly_proto: trying to recv a packet
+I (16808) silly_proto: skipping until magic
+I (16898) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8931
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 10
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16898) silly_proto: successfully read the header
+I (16898) silly_proto: packet has no data, recv done
+I (16898) slave: got packet from master
+I (16898) silly_proto: got an old pkt_id
+I (16898) slave: got an edge pkt_id ack
+I (16898) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9771
+  silly_checksum_t data_checksum = 838
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 11
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (16898) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 11
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 10
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (16898) silly_proto: trying to recv a packet
+I (16898) silly_proto: skipping until magic
+I (16998) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8932
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 11
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (16998) silly_proto: successfully read the header
+I (16998) silly_proto: packet has no data, recv done
+I (16998) slave: got packet from master
+I (16998) silly_proto: got an old pkt_id
+I (16998) slave: got an edge pkt_id ack
+I (16998) slave: returning no data
+I (16998) slave: giving up token
+I (16998) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (16998) silly_proto: trying to recv a packet
+I (16998) silly_proto: skipping until magic
+I (17098) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 4
+  silly_checksum_t header_checksum = 8913
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 11
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 1
+  char[] data = *0x3ffb703b
+}
+I (17098) silly_proto: successfully read the header
+I (17098) silly_proto: packet has no data, recv done
+I (17098) silly_proto: got an old pkt_id
+I (17098) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (17098) silly_proto: trying to recv a packet
+I (17098) silly_proto: skipping until magic
+I (17098) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 1
+  silly_checksum_t header_checksum = 8901
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t pkt_id = 1
+  silly_slave_id_t dst_slave_id = 2
+  char[] data = *0x3ffb703b
+}
+I (17098) silly_proto: successfully read the header
+I (17098) silly_proto: packet has no data, recv done
+I (17108) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (17108) silly_proto: trying to recv a packet
+I (17108) silly_proto: skipping until magic
+I (22408) slave: timed out
+I (22408) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (22408) silly_proto: trying to recv a packet
+I (22408) silly_proto: skipping until magic
+I (22448) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8922
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (22448) silly_proto: successfully read the header
+I (22448) silly_proto: packet has no data, recv done
+I (22448) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (22448) silly_proto: trying to recv a packet
+I (22448) silly_proto: skipping until magic
+I (22548) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8923
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 2
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (22548) silly_proto: successfully read the header
+I (22548) silly_proto: packet has no data, recv done
+I (22548) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (22548) silly_proto: trying to recv a packet
+I (22548) silly_proto: skipping until magic
+I (22648) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8924
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 3
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (22648) silly_proto: successfully read the header
+I (22648) silly_proto: packet has no data, recv done
+I (22648) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (22648) silly_proto: trying to recv a packet
+I (22648) silly_proto: skipping until magic
+I (22748) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8925
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 4
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (22748) silly_proto: successfully read the header
+I (22748) silly_proto: packet has no data, recv done
+I (22748) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (22748) silly_proto: trying to recv a packet
+I (22748) silly_proto: skipping until magic
+I (22838) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8926
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 5
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (22838) silly_proto: successfully read the header
+I (22838) silly_proto: packet has no data, recv done
+I (22838) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (22848) silly_proto: trying to recv a packet
+I (22848) silly_proto: skipping until magic
+I (22948) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8927
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 6
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (22948) silly_proto: successfully read the header
+I (22948) silly_proto: packet has no data, recv done
+I (22948) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (22948) silly_proto: trying to recv a packet
+I (22948) silly_proto: skipping until magic
+I (23038) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8928
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 7
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (23038) silly_proto: successfully read the header
+I (23048) silly_proto: packet has no data, recv done
+I (23048) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (23048) silly_proto: trying to recv a packet
+I (23048) silly_proto: skipping until magic
+I (23138) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 4
+  silly_checksum_t header_checksum = 8910
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 7
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 2
+  char[] data = *0x3ffb703b
+}
+I (23138) silly_proto: successfully read the header
+I (23138) silly_proto: packet has no data, recv done
+I (23138) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (23148) silly_proto: trying to recv a packet
+I (23148) silly_proto: skipping until magic
+I (23148) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 1
+  silly_checksum_t header_checksum = 8900
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t pkt_id = 1
+  silly_slave_id_t dst_slave_id = 1
+  char[] data = *0x3ffb703b
+}
+I (23148) silly_proto: successfully read the header
+I (23148) silly_proto: packet has no data, recv done
+I (23148) silly_proto: got an edge pkt_id
+I (23148) slave: token received
+I (23148) slave: sending ack
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 9
+  silly_checksum_t header_checksum = 8907
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb707b
+}
+I (23148) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (23148) silly_proto: trying to recv a packet
+I (23148) silly_proto: skipping until magic
+I (28448) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9683
+  silly_checksum_t data_checksum = 760
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 1
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (28448) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 1
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (28448) silly_proto: trying to recv a packet
+I (28448) silly_proto: skipping until magic
+I (28488) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8922
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (28498) silly_proto: successfully read the header
+I (28498) silly_proto: packet has no data, recv done
+I (28498) slave: got packet from master
+I (28498) silly_proto: got an old pkt_id
+I (28498) slave: got an edge pkt_id ack
+I (28498) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9301
+  silly_checksum_t data_checksum = 377
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 2
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb707b
+}
+I (28498) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 2
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 1
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (28498) silly_proto: trying to recv a packet
+I (28498) silly_proto: skipping until magic
+I (28598) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8923
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 2
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (28598) silly_proto: successfully read the header
+I (28598) silly_proto: packet has no data, recv done
+I (28598) slave: got packet from master
+I (28598) silly_proto: got an old pkt_id
+I (28598) slave: got an edge pkt_id ack
+I (28598) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9669
+  silly_checksum_t data_checksum = 744
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 3
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb7057
+}
+I (28598) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 3
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 2
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7040
+}
+I (28598) silly_proto: trying to recv a packet
+I (28598) silly_proto: skipping until magic
+I (28698) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8924
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 3
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (28698) silly_proto: successfully read the header
+I (28698) silly_proto: packet has no data, recv done
+I (28698) slave: got packet from master
+I (28698) silly_proto: got an old pkt_id
+I (28698) slave: got an edge pkt_id ack
+I (28698) slave: sending new data
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 31
+  silly_flags_t flags = 16
+  silly_checksum_t header_checksum = 9773
+  silly_checksum_t data_checksum = 847
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t pkt_id = 4
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb707b
+}
+I (28698) slave:main: current state:2
+struct slave_ctx {
+  enum SLAVE_STATES state = 2
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 4
+  silly_pkt_id_t synced_until_id = 1
+  silly_pkt_id_t master_synced_until_id = 3
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (28698) silly_proto: trying to recv a packet
+I (28698) silly_proto: skipping until magic
+I (28798) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 24
+  silly_checksum_t header_checksum = 8925
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 4
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 0
+  char[] data = *0x3ffb703b
+}
+I (28798) silly_proto: successfully read the header
+I (28798) silly_proto: packet has no data, recv done
+I (28798) slave: got packet from master
+I (28798) silly_proto: got an old pkt_id
+I (28798) slave: got an edge pkt_id ack
+I (28798) slave: returning no data
+I (28798) slave: giving up token
+I (28798) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (28798) silly_proto: trying to recv a packet
+I (28798) silly_proto: skipping until magic
+I (28898) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 4
+  silly_checksum_t header_checksum = 8906
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 4
+  silly_pkt_id_t pkt_id = 0
+  silly_slave_id_t dst_slave_id = 1
+  char[] data = *0x3ffb703b
+}
+I (28898) silly_proto: successfully read the header
+I (28898) silly_proto: packet has no data, recv done
+I (28898) silly_proto: got an old pkt_id
+I (28898) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (28908) silly_proto: trying to recv a packet
+I (28908) silly_proto: skipping until magic
+I (28908) silly_proto: successfully skipped until magic
+struct silly_proto_header {
+  silly_magic_t magic = 8874
+  silly_len_t len = 23
+  silly_flags_t flags = 1
+  silly_checksum_t header_checksum = 8901
+  silly_checksum_t data_checksum = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t pkt_id = 1
+  silly_slave_id_t dst_slave_id = 2
+  char[] data = *0x3ffb703b
+}
+I (28908) silly_proto: successfully read the header
+I (28908) silly_proto: packet has no data, recv done
+I (28908) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (28908) silly_proto: trying to recv a packet
+I (28908) silly_proto: skipping until magic
+I (34208) slave: timed out
+I (34208) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (34208) silly_proto: trying to recv a packet
+I (34208) silly_proto: skipping until magic
+I (39508) slave: timed out
+I (39508) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (39508) silly_proto: trying to recv a packet
+I (39508) silly_proto: skipping until magic
+I (44808) slave: timed out
+I (44808) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (44808) silly_proto: trying to recv a packet
+I (44808) silly_proto: skipping until magic
+I (50108) slave: timed out
+I (50108) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (50108) silly_proto: trying to recv a packet
+I (50108) silly_proto: skipping until magic
+I (55408) slave: timed out
+I (55408) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (55408) silly_proto: trying to recv a packet
+I (55408) silly_proto: skipping until magic
+I (60708) slave: timed out
+I (60708) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (60708) silly_proto: trying to recv a packet
+I (60708) silly_proto: skipping until magic
+I (66008) slave: timed out
+I (66008) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (66008) silly_proto: trying to recv a packet
+I (66008) silly_proto: skipping until magic
+I (71308) slave: timed out
+I (71308) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (71308) silly_proto: trying to recv a packet
+I (71308) silly_proto: skipping until magic
+I (76608) slave: timed out
+I (76608) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (76608) silly_proto: trying to recv a packet
+I (76608) silly_proto: skipping until magic
+I (81908) slave: timed out
+I (81908) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (81908) silly_proto: trying to recv a packet
+I (81908) silly_proto: skipping until magic
+I (87208) slave: timed out
+I (87208) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (87208) silly_proto: trying to recv a packet
+I (87208) silly_proto: skipping until magic
+I (92508) slave: timed out
+I (92508) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (92508) silly_proto: trying to recv a packet
+I (92508) silly_proto: skipping until magic
+I (97808) slave: timed out
+I (97808) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (97808) silly_proto: trying to recv a packet
+I (97808) silly_proto: skipping until magic
+I (103108) slave: timed out
+I (103108) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (103108) silly_proto: trying to recv a packet
+I (103108) silly_proto: skipping until magic
+I (108408) slave: timed out
+I (108408) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (108408) silly_proto: trying to recv a packet
+I (108408) silly_proto: skipping until magic
+I (113708) slave: timed out
+I (113708) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (113708) silly_proto: trying to recv a packet
+I (113708) silly_proto: skipping until magic
+I (119008) slave: timed out
+I (119008) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (119008) silly_proto: trying to recv a packet
+I (119008) silly_proto: skipping until magic
+I (124308) slave: timed out
+I (124308) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (124308) silly_proto: trying to recv a packet
+I (124308) silly_proto: skipping until magic
+I (129608) slave: timed out
+I (129608) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (129608) silly_proto: trying to recv a packet
+I (129608) silly_proto: skipping until magic
+I (134908) slave: timed out
+I (134908) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (134908) silly_proto: trying to recv a packet
+I (134908) silly_proto: skipping until magic
+I (140208) slave: timed out
+I (140208) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (140208) silly_proto: trying to recv a packet
+I (140208) silly_proto: skipping until magic
+I (145508) slave: timed out
+I (145508) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (145508) silly_proto: trying to recv a packet
+I (145508) silly_proto: skipping until magic
+I (150808) slave: timed out
+I (150808) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (150808) silly_proto: trying to recv a packet
+I (150808) silly_proto: skipping until magic
+I (156108) slave: timed out
+I (156108) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (156108) silly_proto: trying to recv a packet
+I (156108) silly_proto: skipping until magic
+I (161408) slave: timed out
+I (161408) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (161408) silly_proto: trying to recv a packet
+I (161408) silly_proto: skipping until magic
+I (166708) slave: timed out
+I (166708) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (166708) silly_proto: trying to recv a packet
+I (166708) silly_proto: skipping until magic
+I (172008) slave: timed out
+I (172008) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (172008) silly_proto: trying to recv a packet
+I (172008) silly_proto: skipping until magic
+I (177308) slave: timed out
+I (177308) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (177308) silly_proto: trying to recv a packet
+I (177308) silly_proto: skipping until magic
+I (182608) slave: timed out
+I (182608) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (182608) silly_proto: trying to recv a packet
+I (182608) silly_proto: skipping until magic
+I (187908) slave: timed out
+I (187908) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (187908) silly_proto: trying to recv a packet
+I (187908) silly_proto: skipping until magic
+I (193208) slave: timed out
+I (193208) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (193208) silly_proto: trying to recv a packet
+I (193208) silly_proto: skipping until magic
+I (198508) slave: timed out
+I (198508) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (198508) silly_proto: trying to recv a packet
+I (198508) silly_proto: skipping until magic
+I (203808) slave: timed out
+I (203808) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (203808) silly_proto: trying to recv a packet
+I (203808) silly_proto: skipping until magic
+I (209108) slave: timed out
+I (209108) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (209108) silly_proto: trying to recv a packet
+I (209108) silly_proto: skipping until magic
+I (214408) slave: timed out
+I (214408) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (214408) silly_proto: trying to recv a packet
+I (214408) silly_proto: skipping until magic
+I (219708) slave: timed out
+I (219708) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (219708) silly_proto: trying to recv a packet
+I (219708) silly_proto: skipping until magic
+I (225008) slave: timed out
+I (225008) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (225008) silly_proto: trying to recv a packet
+I (225008) silly_proto: skipping until magic
+I (230308) slave: timed out
+I (230308) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (230308) silly_proto: trying to recv a packet
+I (230308) silly_proto: skipping until magic
+I (235608) slave: timed out
+I (235608) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (235608) silly_proto: trying to recv a packet
+I (235608) silly_proto: skipping until magic
+I (240908) slave: timed out
+I (240908) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (240908) silly_proto: trying to recv a packet
+I (240908) silly_proto: skipping until magic
+I (246208) slave: timed out
+I (246208) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (246208) silly_proto: trying to recv a packet
+I (246208) silly_proto: skipping until magic
+I (251508) slave: timed out
+I (251508) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (251508) silly_proto: trying to recv a packet
+I (251508) silly_proto: skipping until magic
+I (256808) slave: timed out
+I (256808) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (256808) silly_proto: trying to recv a packet
+I (256808) silly_proto: skipping until magic
+I (262108) slave: timed out
+I (262108) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (262108) silly_proto: trying to recv a packet
+I (262108) silly_proto: skipping until magic
+I (267408) slave: timed out
+I (267408) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (267408) silly_proto: trying to recv a packet
+I (267408) silly_proto: skipping until magic
+I (272708) slave: timed out
+I (272708) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (272708) silly_proto: trying to recv a packet
+I (272708) silly_proto: skipping until magic
+I (278008) slave: timed out
+I (278008) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (278008) silly_proto: trying to recv a packet
+I (278008) silly_proto: skipping until magic
+I (283308) slave: timed out
+I (283308) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (283308) silly_proto: trying to recv a packet
+I (283308) silly_proto: skipping until magic
+I (288608) slave: timed out
+I (288608) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (288608) silly_proto: trying to recv a packet
+I (288608) silly_proto: skipping until magic
+I (293908) slave: timed out
+I (293908) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (293908) silly_proto: trying to recv a packet
+I (293908) silly_proto: skipping until magic
+I (299208) slave: timed out
+I (299208) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (299208) silly_proto: trying to recv a packet
+I (299208) silly_proto: skipping until magic
+I (304508) slave: timed out
+I (304508) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (304508) silly_proto: trying to recv a packet
+I (304508) silly_proto: skipping until magic
+I (309808) slave: timed out
+I (309808) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (309808) silly_proto: trying to recv a packet
+I (309808) silly_proto: skipping until magic
+I (315108) slave: timed out
+I (315108) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (315108) silly_proto: trying to recv a packet
+I (315108) silly_proto: skipping until magic
+I (320408) slave: timed out
+I (320408) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (320408) silly_proto: trying to recv a packet
+I (320408) silly_proto: skipping until magic
+I (325708) slave: timed out
+I (325708) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (325708) silly_proto: trying to recv a packet
+I (325708) silly_proto: skipping until magic
+I (331008) slave: timed out
+I (331008) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (331008) silly_proto: trying to recv a packet
+I (331008) silly_proto: skipping until magic
+I (336308) slave: timed out
+I (336308) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (336308) silly_proto: trying to recv a packet
+I (336308) silly_proto: skipping until magic
+I (341608) slave: timed out
+I (341608) slave:main: current state:1
+struct slave_ctx {
+  enum SLAVE_STATES state = 1
+  silly_slave_id_t my_slave_id = 1
+  silly_pkt_id_t last_pkt_id = 0
+  silly_pkt_id_t synced_until_id = 0
+  silly_pkt_id_t master_synced_until_id = 0
+  uart_port_t uart_port = 1
+  TickType_t slave_do_state_timeout = 530
+  struct silly_proto_header * prev_out = 0x3ffb7064
+}
+I (341608) silly_proto: trying to recv a packet
+I (341608) silly_proto: skipping until magic
